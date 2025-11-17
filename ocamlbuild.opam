@@ -1,4 +1,5 @@
 opam-version: "2.0"
+version: "0.15.0+ox"
 maintainer: "Gabriel Scherer <gabriel.scherer@gmail.com>"
 authors: ["Nicolas Pouillard" "Berke Durak"]
 homepage: "https://github.com/ocaml/ocamlbuild/"
