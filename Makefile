@@ -417,10 +417,22 @@ endif
 
 # The generic rules
 
-%.cmo: %.ml
+src/%.cmo: src/%.ml
+	$(OCAMLC) -for-pack Ocamlbuild_pack $(OCB_COMPFLAGS) -c $<
+
+bin/%.cmo: bin/%.ml
 	$(OCAMLC) $(OCB_COMPFLAGS) -c $<
 
-%.cmi: %.mli
+plugin-lib/%.cmo: plugin-lib/%.ml
+	$(OCAMLC) $(OCB_COMPFLAGS) -c $<
+
+src/%.cmi: src/%.mli
+	$(OCAMLC) -for-pack Ocamlbuild_pack $(OCB_COMPFLAGS) -c $<
+
+bin/%.cmi: bin/%.mli
+	$(OCAMLC) $(OCB_COMPFLAGS) -c $<
+
+plugin-lib/%.cmi: plugin-lib/%.mli
 	$(OCAMLC) $(OCB_COMPFLAGS) -c $<
 
 src/%.cmx: src/%.ml

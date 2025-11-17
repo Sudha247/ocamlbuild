@@ -58,6 +58,14 @@ let apply_config s (config : t) init =
   List.fold_left begin fun tags (key, v) ->
     if key_match key s then
       List.fold_right add v.plus_tags (List.fold_right remove v.minus_tags tags)
+    else if
+         List.mem (Filename.extension s) [".ml"; ".mli"]
+      && key_match key (Filename.remove_extension s ^ ".cmx")
+    then
+      let only_for_pack l =
+        List.filter (fun (tag, _) -> String.length tag >= 9 && String.sub tag 0 9 = "for-pack(") l
+      in
+      List.fold_right add (only_for_pack v.plus_tags) (List.fold_right remove (only_for_pack v.minus_tags) tags)
     else tags
   end init config
 
